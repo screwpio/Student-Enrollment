@@ -27,7 +27,7 @@ def predict_for_new_student(age, gender, major, top_n=3):
     return predictions
 
 # Streamlit interface
-st.title("Course Prediction System")
+st.title("Course Enrollment System")
 
 # Tabs
 option = st.sidebar.selectbox("Select User Type", ["Existing Student", "New Student", "Admin"])
@@ -54,7 +54,7 @@ if option == "Existing Student":
                 for _, row in taken_courses.iterrows():
                     st.write(f"- {row['Course']}: {row['Course Title']}")
                 
-                st.subheader("Predicted Courses")
+                st.subheader("Recommended Courses")
                 for _, row in preds.iterrows():
                     st.write(f"- {row['Predicted Course']}: {row['Course Title']}")
 
@@ -62,7 +62,7 @@ if option == "Existing Student":
             st.error(f"Error: {e}")
 
 elif option == "New Student":
-    st.header("New Student Prediction")
+    st.header("New Student Course Recommendations")
     age = st.number_input("Age", min_value=10, max_value=100, step=1)
     gender = st.selectbox("Gender", df_info["Gender"].dropna().unique())
     major = st.selectbox("Major", df_info["Major Applied for"].dropna().unique())
